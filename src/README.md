@@ -5,7 +5,7 @@
 | name | description |
 | ---- | ----------- |
 | ConnectionStrings__DefaultConnection | DB ConnectionString |
-| IssuerSigningKey_SigningKey | Key used to sign JWT |
+| IssuerSigningKey__SigningKey | Key used to sign JWT |
 
 ## VisualStudio / VSCode
 Use `secret manager` tool to set the 2 variables above
@@ -33,6 +33,6 @@ $ dotnet run
 ```shell
 $ docker run -it --rm --name amphitrite \
 > -e "ConnectionStrings__DefaultConnection=<your_db_connection_string>" \
-> -e "IssuerSigningKey_SigningKey=<issuer_key>" \
+> -e "IssuerSigningKey__SigningKey=<issuer_key>" \
 > -p 8080:80 amphitrite
 ```
