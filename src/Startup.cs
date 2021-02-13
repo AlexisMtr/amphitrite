@@ -43,9 +43,7 @@ namespace Amphitrite
 
             services.Configure<IssuerSigningKeySettings>(Configuration.GetSection("IssuerSigningKey"));
 
-            services.AddDbContext<AmphitriteContext>(opt
-                => opt.UseInMemoryDatabase("amphitrite"));
-            //=> opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AmphitriteContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AmphitriteContext>();
 
