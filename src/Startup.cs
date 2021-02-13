@@ -92,7 +92,7 @@ namespace Amphitrite
                     Contact = new OpenApiContact
                     {
                         Name = "AlexisMtr",
-                        Url = new Uri("http://github.com/AlexisMtr")
+                        Url = new Uri("https://github.com/AlexisMtr")
                     }
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
