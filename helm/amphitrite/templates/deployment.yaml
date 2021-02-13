@@ -33,6 +33,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ConnectionStrings_DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "amphitrite.fullname" . }}
+                  key: DB_CONNECTION_STRING
+            - name: IssuerSigningKey_SigningKey
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "amphitrite.fullname" . }}
+                  key: ISSUER_KEY
           ports:
             - name: http
               containerPort: 80
