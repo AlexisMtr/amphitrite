@@ -1,0 +1,29 @@
+branches:
+- main
+plugins:
+- "@semantic-release/commit-analyzer"
+- "@semantic-release/release-notes-generator"
+- - "@semantic-release/changelog"
+  - changelogFile: CHANGELOG.md
+- - "@semantic-release/exec"
+  - verifyConditionsCmd: "echo \"execute successCmd\""
+    prepareCmd: sed -Ei "s#<Version>.*</Version>#<Version>${nextRelease.version}</Version>#g" Amphitrite.csproj
+    publishCmd: |
+      dotnet publish Amphitrite.csproj -c Release -o ./app/publish
+      cd ./app/publish
+      touch amphitrite.tar.gz && tar --exclude amphitrite.tar.gz -zcvf amphitrite.tar.gz .
+
+- - "@semantic-release/git"
+  - assets:
+    - CHANGELOG.md
+    - Amphitrite.csproj
+    message: |-
+      release: ${nextRelease.version} [skip ci]
+
+      ${nextRelease.notes}
+- - "@semantic-release/github"
+  - assets:
+    - path: './app/publish/amphitrite.tar.gz'
+- - "@semantic-release/exec"
+  - verifyConditionsCmd: "echo \"execute successCmd\""
+    successCmd: "../.github/workflows/scripts/commit-helm -c ../helm/amphitrite/Chart.yaml -t ${nextRelease.type} -v ${nextRelease.version} -s v"
