@@ -34,12 +34,12 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: ConnectionStrings_DefaultConnection
+            - name: ConnectionStrings__DefaultConnection
               valueFrom:
                 secretKeyRef:
                   name: {{ include "amphitrite.fullname" . }}
                   key: DB_CONNECTION_STRING
-            - name: IssuerSigningKey_SigningKey
+            - name: IssuerSigningKey__SigningKey
               valueFrom:
                 secretKeyRef:
                   name: {{ include "amphitrite.fullname" . }}
@@ -48,14 +48,6 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
