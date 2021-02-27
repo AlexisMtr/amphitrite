@@ -1,7 +1,7 @@
  
 # amphitrite
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 REST API for Poseidon Swimmingpool solution
 
@@ -12,7 +12,7 @@ To install the chart with the release name `my-release`:
 ```console
 $ helm repo add poseidon https://alexismtr.github.io/poseidon-helm-chart
 $ helm repo update
-$ helm install my-release poseidon/amphitrite --version 1.0.0
+$ helm install my-release poseidon/amphitrite --version 1.1.0
 ```
 
 ## Values
@@ -27,6 +27,7 @@ $ helm install my-release poseidon/amphitrite --version 1.0.0
 | env | string | `"production"` | define global environment and set ASPNETCORE_ENVIRONMENT (Production if equals production, Development otherwise) |
 | environment.dbConnectionString | string | `nil` | connection string to Poseidon database |
 | environment.issuerKey | string | `nil` | key used to sign JWT |
+| existingEnvSecret | string | `""` | use existing secret to set environment variable |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"alexismtr/amphitrite"` |  |

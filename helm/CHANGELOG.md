@@ -1,3 +1,10 @@
+# [helm-chart-v1.1.0](https://github.com/AlexisMtr/amphitrite/compare/helm-chart-v1.0.0...helm-chart-v1.1.0) (2021-02-27)
+
+
+### Features
+
+* **helm:** allow to use existing secret to set env ([16e7737](https://github.com/AlexisMtr/amphitrite/commit/16e773780f79528897fe25ba68e46501e14123f7))
+
 # helm-chart-v1.0.0 (2021-02-13)
 
 
