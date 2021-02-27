@@ -80,6 +80,9 @@ affinity: {}
 
 # -- define global environment and set ASPNETCORE_ENVIRONMENT (Production if equals production, Development otherwise)
 env: production
+
+# -- use existing secret to set environment variable
+existingEnvSecret: ""
 environment:
   # -- connection string to Poseidon database
   dbConnectionString:
