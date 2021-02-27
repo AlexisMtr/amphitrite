@@ -147,6 +147,13 @@ namespace Amphitrite
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
