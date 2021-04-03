@@ -1,9 +1,115 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "parameters": {},
+  "parameters": {
+    "releaseName": {
+      "type": "string",
+      "defaultValue": "[take(uniqueString(resourceGroup().id), 5)]",
+      "maxLength": 10,
+      "minLength": 1
+    },
+    "sqlServerConnectionString": {
+      "type": "secureString"
+    },
+    "issuerSigningKey": {
+      "type": "secureString"
+    },
+    "skuName": {
+      "type": "string",
+      "defaultValue": "F1"
+    },
+    "appInsightInstrumentationKey": {
+      "type": "secureString"
+    },
+    "aspNetEnv": {
+      "type": "string",
+      "defaultValue": "Development",
+      "allowedValues": [
+        "Production",
+        "Development"
+      ]
+    }
+  },
   "functions": [],
-  "variables": {},
-  "resources": [],
-  "outputs": {}
+  "variables": {
+    "webAppName": "[format('{0}-amphitrite', parameters('releaseName'))]",
+    "servicePlanName": "[format('{0}-amphitrite-splan', parameters('releaseName'))]",
+    "appInsightName": "[format('{0}-amphitrite-appinsights', parameters('releaseName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2020-10-01",
+      "name": "[variables('servicePlanName')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('skuName')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2020-10-01",
+      "name": "[variables('webAppName')]",
+      "location": "[resourceGroup().location]",
+      "kind": "api",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
+        "siteConfig": {
+          "netFrameworkVersion": "v5.0",
+          "appSettings": [
+            {
+              "name": "IssuerSigningKey:SigningKey",
+              "value": "[parameters('issuerSigningKey')]"
+            },
+            {
+              "name": "ASPNETCORE_ENVIRONMENT",
+              "value": "[parameters('aspNetEnv')]"
+            }
+          ],
+          "connectionStrings": [
+            {
+              "name": "DefaultConnection",
+              "type": "SQLServer",
+              "connectionString": "[parameters('sqlServerConnectionString')]"
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
+      ]
+    },
+    {
+      "condition": "[empty(parameters('appInsightInstrumentationKey'))]",
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2015-05-01",
+      "name": "[variables('appInsightName')]",
+      "location": "[resourceGroup().location]",
+      "kind": "web",
+      "properties": {
+        "Application_Type": "web",
+        "SamplingPercentage": 100
+      }
+    }
+  ],
+  "outputs": {
+    "appInsightInstrumentationKey": {
+      "type": "string",
+      "value": "[if(empty(parameters('appInsightInstrumentationKey')), reference(resourceId('Microsoft.Insights/components', variables('appInsightName'))).InstrumentationKey, parameters('appInsightInstrumentationKey'))]"
+    },
+    "webAppPrincipalId": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2020-10-01', 'full').identity.principalId]"
+    }
+  },
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.126.58533",
+      "templateHash": "12340386374528405443"
+    }
+  }
 }
