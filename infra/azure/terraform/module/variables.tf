@@ -1,16 +1,17 @@
-variable "rg_name" {
-  type        = string
-  description = "name of the resource group"
-}
-
-variable "rg_location" {
-  type        = string
-  description = "location of the resource group"
-}
-
 variable "release_name" {
   type        = string
-  description = "name of the release (used to name resources)"
+  description = "Name of the release (used to prefix resources)"
+}
+
+variable "rg_name" {
+  type        = string
+  description = "Name of the existing resource group"
+}
+
+variable "db_connection_string" {
+  type        = string
+  sensitive   = true
+  description = "ConnectionString to Database"
 }
 
 variable "app_insight_instrumentation_key" {
@@ -24,32 +25,22 @@ variable "create_app_insights" {
   description = "Create or use given instrumentationkey"
 }
 
-variable "event_subscribe_connection_string" {
-  type        = string
-  description = "ConnectionString to EventHub/Kafka broker to listen on (use KV notation to use secret on KV)"
+variable "aspnet_environment" {
+  type    = string
+  default = "Development"
 }
 
-variable "event_subscribe_topic" {
+variable "issuer_signing_key" {
   type        = string
-  description = "EventHub/Kafka topic to listen on"
+  description = "Key used to sign user JWT"
 }
 
-variable "event_publish_connection_string" {
-  type        = string
-  description = "ConnectionString to EventHub/Kafka broker to publish on (use KV notation to use secret on KV)"
+variable "sku_size" {
+  type    = string
+  default = "F1"
 }
 
-variable "event_publish_topic" {
-  type        = string
-  description = "EventHub/Kafka topic to publish on"
-}
-
-variable "db_connection_string" {
-  type        = string
-  description = "ConnectionString to the poseidon database (use KV notation to use secret on KV)"
-}
-
-variable "athena_package_source" {
-  type        = string
-  description = "URI of the Athena Package available on Internet"
+variable "sku_tier" {
+  type    = string
+  default = "Free"
 }
