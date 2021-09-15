@@ -39,12 +39,12 @@ spec:
             - name: ConnectionStrings__DefaultConnection
               valueFrom:
                 secretKeyRef:
-                  name: {{ default (include "amphitrite.fullname" .) .Values.existingEnvSecret }}
+                  name: {{ include "amphitrite.fullname" . }}
                   key: DB_CONNECTION_STRING
             - name: IssuerSigningKey__SigningKey
               valueFrom:
                 secretKeyRef:
-                  name: {{ default (include "amphitrite.fullname" .) .Values.existingEnvSecret }}
+                  name: {{ include "amphitrite.fullname" . }}
                   key: ISSUER_KEY
           ports:
             - name: http
