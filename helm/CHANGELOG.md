@@ -1,3 +1,22 @@
+# [helm-chart-v2.0.0](https://github.com/AlexisMtr/amphitrite/compare/helm-chart-v1.1.1...helm-chart-v2.0.0) (2021-09-18)
+
+
+### Bug Fixes
+
+* **helm:** secret encoded function ([43c74e3](https://github.com/AlexisMtr/amphitrite/commit/43c74e397c6f9ba82b30c5c0e4cbad7e09214afa))
+
+
+### Features
+
+* **helm:** remove ability to use existing secret ([efad1ee](https://github.com/AlexisMtr/amphitrite/commit/efad1ee6c439162f1126105c3761c4aca608e6a1))
+* **ingress:** support networking.k8s.io/v1 ingress only ([b9c7f07](https://github.com/AlexisMtr/amphitrite/commit/b9c7f079b5e83aa0a1f79670d8a0c0b1cb298bc7))
+
+
+### BREAKING CHANGES
+
+* **helm:** existingEnvSecret cannot be used anymore
+* **ingress:** drop support for old ingress apiVersion (required kubernetes v1.19+)
+
 # [helm-chart-v1.1.1](https://github.com/AlexisMtr/amphitrite/compare/helm-chart-v1.1.0...helm-chart-v1.1.1) (2021-02-27)
 
 
