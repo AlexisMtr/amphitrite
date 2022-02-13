@@ -8,7 +8,8 @@ namespace Amphitrite.Configuration.MapperProfiles
     {
         public TelemetryProfile()
         {
-            CreateMap<Telemetry, TelemetryDto>();
+            CreateMap<Telemetry, TelemetryDto>()
+                .ForMember(d => d.DateTime, opt => opt.MapFrom(s => s.DateTime.DateTime));
             CreateMap<PaginatedElement<Telemetry>, PaginatedDto<TelemetryDto>>();
         }
     }
