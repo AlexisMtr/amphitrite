@@ -40,6 +40,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
+
+    - name: Setup .NET6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: "6.0.x"
+        
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
@@ -273,7 +279,7 @@ jobs:
         curl --silent --show-error --fail --location --output /tmp/kubeval.tar.gz $KUBEVAL_SRC
         tar -xf /tmp/kubeval.tar.gz kubeval
 
-        helm template $CHART_DIR | ./kubeval --strict \
+        helm template ci-chart $CHART_DIR --set environment.dbConnectionString=ci-connection | ./kubeval --strict \
           --ignore-missing-schemas --kubernetes-version "${KUBERNETES_VERSION#v}" \
           --schema-location "${SCHEMA_LOCATION}"
 
