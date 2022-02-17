@@ -1,3 +1,11 @@
+# [amphitrite-v1.0.2](https://github.com/AlexisMtr/amphitrite/compare/amphitrite-v1.0.1...amphitrite-v1.0.2) (2022-02-17)
+
+
+### Bug Fixes
+
+* **telemetries:** fix telemetry mapping ([e1a2f53](https://github.com/AlexisMtr/amphitrite/commit/e1a2f530c13e1f6b22f7c00f3028194a6ecbc2da))
+* update dependencies ([3b22c01](https://github.com/AlexisMtr/amphitrite/commit/3b22c01a78ba8efec8f110ac02e6afd31f96a286))
+
 # [amphitrite-v1.0.1](https://github.com/AlexisMtr/amphitrite/compare/amphitrite-v1.0.0...amphitrite-v1.0.1) (2021-02-27)
 
 
