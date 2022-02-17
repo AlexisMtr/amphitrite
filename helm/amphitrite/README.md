@@ -1,7 +1,7 @@
  
 # amphitrite
 
-![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.1](https://img.shields.io/badge/AppVersion-1.0.1-informational?style=flat-square)
+![Version: 2.0.1](https://img.shields.io/badge/Version-2.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 REST API for Poseidon Swimmingpool solution
 
@@ -12,7 +12,7 @@ To install the chart with the release name `my-release`:
 ```console
 $ helm repo add poseidon https://alexismtr.github.io/poseidon-helm-chart
 $ helm repo update
-$ helm install my-release poseidon/amphitrite --version 2.0.0
+$ helm install my-release poseidon/amphitrite --version 2.0.1
 ```
 
 ## Values

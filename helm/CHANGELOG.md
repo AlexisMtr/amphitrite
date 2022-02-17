@@ -1,3 +1,10 @@
+# [helm-chart-v2.0.1](https://github.com/AlexisMtr/amphitrite/compare/helm-chart-v2.0.0...helm-chart-v2.0.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* **amphitrite:** bump appVersion to 1.0.2 ([ff81ca9](https://github.com/AlexisMtr/amphitrite/commit/ff81ca913a42748bfb6c22b8bed7d9dc15e4d692))
+
 # [helm-chart-v2.0.0](https://github.com/AlexisMtr/amphitrite/compare/helm-chart-v1.1.1...helm-chart-v2.0.0) (2021-09-18)
 
 
